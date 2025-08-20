@@ -15,9 +15,9 @@ import seaborn as sns
 from sklearn.feature_selection import SelectKBest, SelectFpr, SelectFdr, SelectFwe
 
 
-# ------------------------------
+# -------------------------------
 # Utilities
-# ------------------------------
+# -------------------------------
 def make_fig():
     fig = plt.figure()
     return fig
