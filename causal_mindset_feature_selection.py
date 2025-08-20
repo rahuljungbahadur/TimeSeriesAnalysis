@@ -314,6 +314,8 @@ def plot_y_correlations(X_df: pd.DataFrame, y: np.ndarray, title: str):
 # Updated page configuration
 st.set_page_config(page_title="Causal Mindset: Feature Selection", layout="wide", initial_sidebar_state="expanded")
 st.title("🌟 Causal Mindset: Feature Selection Playground")
+st.text("Adding features that provide unique information about the target variable can improve model performance.")
+st.text("This becomes especially important when there is significant correlation among X2 - > X1 and X3 -> X1.")
 st.markdown(
     """
     <style>
@@ -378,5 +380,5 @@ df_corr = Xte.copy()
 df_corr = df_corr.assign(y=yte)
 plot_y_correlations(Xte, yte, "Feature–y Correlations (Test Set)")
 
-st.subheader("Permutation Importance (Test Set)")
+st.subheader("Feature Importance")
 plot_both_importances(model, Xte, yte, title_prefix=f"{model.__class__.__name__}")
