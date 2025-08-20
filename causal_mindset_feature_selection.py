@@ -359,6 +359,8 @@ st.subheader("Sample of Simulated Data")
 st.dataframe(df.head(), use_container_width=True)
 print_functional_form_non_ts(beta_x1, add_x4, beta_x4)
 
+st.text("Only LassoCV and RFE consider all features together")
+
 # Prepare data
 y = df.pop("y").values
 cols = [c for c in include_features if c in df.columns]
@@ -371,6 +373,12 @@ X = df[cols]
 model, metrics, (Xtr, Xte, ytr, yte) = fit_model(X, y, model_type, test_size, seed)
 plot_feature_selection_non_ts(Xtr, ytr, method_rfe=True)
 plot_threshold_selectors_non_ts(Xtr, ytr, alpha=0.05, k=None)  # k defaults to ~half of features
+
+st.text("""If you go by conventional methods of considering highly correlated features as important, you might end up dropping X4
+        But X4 is indeed important as per model and permutation importance!
+        This is because X4 brings unique information to the model that is not captured by X1, X2, or X3.
+        Moreover, if X2 and X3 are highly correlated with X1, then it is sufficient to just include X1 in the model to capture the effect of X2 and X3 on y.
+        """)
 
 st.subheader("Model Metrics")
 st.write(pd.DataFrame([metrics]))
